@@ -4,8 +4,8 @@
   :license ""
   :depends-on ()
   :components ((:module "src"
-                :components
-                ((:file "main"))))
+                        :components
+                        ((:file "main"))))
   :description ""
   :long-description
   #.(read-file-string
@@ -16,10 +16,9 @@
   :author "Manfred"
   :license ""
   :depends-on ("cl-mars-rover"
-               "rove")
+               "fiveam")
   :components ((:module "tests"
-                :components
-                ((:file "main"))))
+                        :components ((:file "main"))))
   :description "Test system for cl-mars-rover"
 
-  :perform (test-op (op c) (symbol-call :rove :run c)))
+  :perform (test-op (op c) (symbol-call :fiveam :run!)))

@@ -1,11 +1,20 @@
-(defpackage cl-mars-rover/tests/main
+(defpackage cl-mars-rover-tests
   (:use :cl
         :cl-mars-rover
-        :rove))
-(in-package :cl-mars-rover/tests/main)
+        :fiveam)
+  (:export #:run!
+           #:all-tests
+           #:nil))
+(in-package :cl-mars-rover-tests)
 
 ;; NOTE: To run this test file, execute `(asdf:test-system :cl-mars-rover)' in your Lisp.
 
-(deftest test-target-1
-  (testing "should (= 1 1) to be true"
-    (ok (= 1 1))))
+
+(test rover-init
+  "Tests for initializing the rover"
+  (is (eq (car (rover-init '(1 . 1) 'North)) '(1 . 1)))
+  (is (eq (car (rover-init '(1 . 2) 'North)) '(1 . 2)))
+  (is (eq (cadr (rover-init '(1 . 1) 'North)) 'North))
+  (is (eq (cadr (rover-init '(1 . 1) 'South)) 'South)))
+
+(run! 'rover-init)
