@@ -6,11 +6,13 @@
 
 (defparameter *coords* '(1 . 1))
 (defparameter *heading* "N")
+(defparameter *grid* '(10 . 10))
 
-(defun init-rover (coords heading)
+(defun init-rover (coords heading grid)
   (print "Initializing rover")
   (setf *coords* coords)
   (setf *heading* heading)
+  (setf *grid* grid)
   (list *coords* *heading*))
 
 (defun set-heading-north ()
@@ -32,13 +34,17 @@
   ))
 
 (defun inc-y-coord ()
-  (setf *coords* (cons (car *coords*) (+ (cdr *coords*) 1))))
+  (setf *coords* (cons (car *coords*) (+ (cdr *coords*) 1)))
+  (if (= (cdr *coords*) (cdr *grid*)) (setf *coords* (cons (car *coords*) 1))))
 (defun inc-x-coord ()
-  (setf *coords* (cons (+ (car *coords*) 1) (cdr *coords*))))
+  (setf *coords* (cons (+ (car *coords*) 1) (cdr *coords*)))
+  (if (= (car *coords*) (car *grid*)) (setf *coords* (cons 1 (cdr *coords*)))))
 (defun dec-y-coord ()
-  (setf *coords* (cons (car *coords*) (- (cdr *coords*) 1))))
+  (setf *coords* (cons (car *coords*) (- (cdr *coords*) 1)))
+  (if (= (cdr *coords*) 0) (setf *coords* (cons (car *coords*) (cdr *grid*)))))
 (defun dec-x-coord ()
-  (setf *coords* (cons (- (car *coords*) 1) (cdr *coords*))))
+  (setf *coords* (cons (- (car *coords*) 1) (cdr *coords*)))
+  (if (= (car *coords*) 0) (setf *coords* (cons (car *grid*) (cdr *coords*)))))
 
 (defun move-rover (direction)
   (format t "move rover ~A" direction)
