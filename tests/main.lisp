@@ -17,8 +17,8 @@
   (is (equal (cadr (init-rover '(1 . 1) "N")) "N"))
   (is (equal (cadr (init-rover '(1 . 1) "S")) "S")))
 
-(test turn-rover-left
-  "Tests for turning the rover left with changing it's heading"
+(test turn-rover
+  "Tests for turning the rover with changing it's heading"
   (init-rover '(1 . 1) "N")
   (is (equal (cadr (execute-cmds '("l"))) "W"))
   (init-rover '(1 . 1) "N")
@@ -27,10 +27,6 @@
   (is (equal (cadr (execute-cmds '("l" "l" "l"))) "E"))
   (init-rover '(1 . 1) "N")
   (is (equal (cadr (execute-cmds '("l" "l" "l" "l"))) "N"))
-  )
-
-(test turn-rover-right
-  "Tests for turning the rover right with changing it's heading"
   (init-rover '(1 . 1) "N")
   (is (equal (cadr (execute-cmds '("r"))) "E"))
   (init-rover '(1 . 1) "N")
@@ -41,6 +37,28 @@
   (is (equal (cadr (execute-cmds '("r" "r" "r" "r"))) "N"))
   )
 
+(test move-rover
+  "Tests for moving the rover forward/backward"
+  ;; forward
+  (init-rover '(1 . 1) "N")
+  (is (equal (cdr (car (execute-cmds '("f" "f")))) 3))
+  (init-rover '(1 . 1) "E")
+  (is (equal (car (car (execute-cmds '("f" "f")))) 3))
+  (init-rover '(1 . 1) "S")
+  (is (equal (cdr (car (execute-cmds '("f" "f")))) -1))
+  (init-rover '(1 . 1) "W")
+  (is (equal (car (car (execute-cmds '("f" "f")))) -1))
+  ;; back
+  (init-rover '(1 . 1) "N")
+  (is (equal (cdr (car (execute-cmds '("b" "b")))) -1))
+  (init-rover '(1 . 1) "E")
+  (is (equal (car (car (execute-cmds '("b" "b")))) -1))
+  (init-rover '(1 . 1) "S")
+  (is (equal (cdr (car (execute-cmds '("b" "b")))) 3))
+  (init-rover '(1 . 1) "W")
+  (is (equal (car (car (execute-cmds '("b" "b")))) 3))
+  )
+
 (run! 'init-rover)
-(run! 'turn-rover-left)
-(run! 'turn-rover-right)
+(run! 'turn-rover)
+(run! 'move-rover)
