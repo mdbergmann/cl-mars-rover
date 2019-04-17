@@ -50,12 +50,12 @@
            ((equal *heading* "W") (if (eq direction 'Forward) (dec-x-coord) (inc-x-coord)))
            )))
     ;; list with obstacles in the way, nil if no obstacle
-    (if (eq nil (remove-if-not #'(lambda (obstacle)
-                                   (if
-                                    (and (= (car obstacle) (car new-coords))
-                                         (= (cdr obstacle) (cdr new-coords)))
-                                    t
-                                    nil)) *obstacles*))
+    (if (eql nil (remove-if-not #'(lambda (obstacle)
+                                    (if
+                                     (and (= (car obstacle) (car new-coords))
+                                          (= (cdr obstacle) (cdr new-coords)))
+                                     t
+                                     nil)) *obstacles*))
         new-coords
         nil)
     ))

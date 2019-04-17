@@ -66,14 +66,14 @@
   "Detect obstacles on the way of the rover"
   (default-init-rover "N")
   ;; third f is obstacle
-  (is (eq (car (car (execute-cmds '("f" "f" "f")))) 1))
-  (is (eq (cdr (car (execute-cmds '("f" "f" "f")))) 3))
-  (is (eq (caddr (execute-cmds '("f" "f" "f"))) "f"))
+  (is (= (car (car (execute-cmds '("f" "f" "f")))) 1))
+  (is (= (cdr (car (execute-cmds '("f" "f" "f")))) 3))
+  (is (equal (caddr (execute-cmds '("f" "f" "f"))) "f"))
 
   (init-rover '(1 . 4) "N" '(10 . 10) '((1 . 1)))
-  (is (eq (car (car (execute-cmds '("b" "b" "b")))) 1))
-  (is (eq (cdr (car (execute-cmds '("b" "b" "b")))) 2))
-  (is (eq (caddr (execute-cmds '("b" "b" "b"))) "b"))
+  (is (= (car (car (execute-cmds '("b" "b" "b")))) 1))
+  (is (= (cdr (car (execute-cmds '("b" "b" "b")))) 2))
+  (is (equal (caddr (execute-cmds '("b" "b" "b"))) "b"))
   
   )
 
